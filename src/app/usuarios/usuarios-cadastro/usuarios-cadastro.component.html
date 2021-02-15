@@ -1,0 +1,62 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo'}} Usuário</h1>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          [(ngModel)]="usuario.nome"
+          #nome="ngModel" required minlength="3">
+
+        <app-message [control]="nome" error="required"
+          text="Informe um nome"></app-message>
+        <app-message [control]="nome" error="minlength"
+          text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Email</label>
+        <input pInputText type="text" name="email"
+          [(ngModel)]="usuario.email"
+          #email="ngModel" required minlength="3">
+
+        <app-message [control]="email" error="required"
+          text="Informe um e-mail"></app-message>
+        <app-message [control]="email" error="minlength"
+          text="Mínimo de {{ email.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Senha</label>
+        <input pInputText type="password" name="senha"
+          [(ngModel)]="usuario.senha"
+          #senha="ngModel" required minlength="3">
+
+        <app-message [control]="senha" error="required"
+          text="Informe uma senha"></app-message>
+        <app-message [control]="senha" error="minlength"
+          text="Mínimo de {{ senha.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Permissões</label>
+        <p-multiSelect name="permissoes" [options]="permissoes" optionLabel="descricao" placeholder="Selecione"
+          [filter]="false"
+          [(ngModel)]="usuario.permissoes"
+          required></p-multiSelect>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info"
+          (click)="novo(f)"></button>
+        <a routerLink="/usuarios">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>
